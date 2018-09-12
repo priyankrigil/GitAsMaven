@@ -61,7 +61,7 @@ uploadArchives {
 
     repositories.mavenDeployer {
         configuration = configurations.deployLibrary
-        repository(url: 'git://git@github.com:' + COMPANY + '/' + REPOSITORY_NAME + '.git')
+        repository(url: 'git://github.com/' + COMPANY + '/' + REPOSITORY_NAME + '.git')
 
         uniqueVersion = true
 
