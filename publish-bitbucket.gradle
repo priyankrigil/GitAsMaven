@@ -38,7 +38,7 @@ task lookForArtifacts {
     doLast {
         def artifactName = ARTIFACT_NAME + '-' + ARTIFACT_VERSION + '.aar'
         def artifactPath = ARTIFACT_PACKAGE.replace(".", "/") + "/" + ARTIFACT_NAME + "/" + ARTIFACT_VERSION + "/" + artifactName
-        def repositoryUrl = 'https://api.bitbucket.org/1.0/repositories/' + COMPANY + '/' + REPOSITORY_NAME + '/raw/releases/' + artifactPath
+        def repositoryUrl = 'https://api.github.com/1.0/repositories/' + COMPANY + '/' + REPOSITORY_NAME + '/raw/releases/' + artifactPath
 
         println("")
         println("Checking if artifact already exists: " + artifactName)
@@ -61,7 +61,7 @@ uploadArchives {
 
     repositories.mavenDeployer {
         configuration = configurations.deployLibrary
-        repository(url: 'git:releases://git@bitbucket.org:' + COMPANY + '/' + REPOSITORY_NAME + '.git')
+        repository(url: 'git:releases://github.com:' + COMPANY + '/' + REPOSITORY_NAME + '.git')
 
         uniqueVersion = true
 
@@ -88,7 +88,7 @@ def urlExists(String repositoryUrl) {
         println("responseCode: " + responseCode)
 
 	      if (responseCode == 401) {
-          throw new RuntimeException("Unauthorized BitBucket user - please provide valid username and password in gradle.properties file")
+          throw new RuntimeException("Unauthorized Github user - please provide valid username and password in gradle.properties file")
         }
 
         return (200 == responseCode)
